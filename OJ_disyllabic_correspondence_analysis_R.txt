@@ -8,6 +8,7 @@ library("gplots")
 library("graphics")
 
 data1 <- read_csv("C:/downloads/OJdisyllabic/ONCOJ disyllabic_type contingency table - disyllabic_type.csv",show_col_types = FALSE)
+data1 <- read_csv("/Users/john/Dropbox/ONCOJ disyllabic_type contingency table - disyllabic_type.csv",show_col_types = FALSE)
 (disyl<-table(data1$V1, data1$V2))
 rowSums(disyl)
 colSums(disyl)
