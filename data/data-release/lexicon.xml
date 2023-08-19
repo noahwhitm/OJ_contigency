@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+-<?xml version="1.0" encoding="UTF-8"?>
 <?oxygen RNGSchema="../vsarpj.rnc" type="compact"?>
 <div xmlns="http://www.tei-c.org/ns/1.0">
     <superEntry xml:id="l000002-main">
@@ -6,8 +6,8 @@
             <form>
                 <orth>-m-</orth>
                 <gramGrp>
-                    <pos>auxiliary</pos>
                     <iType affixType="aStem" type="QD"/>
+                    <pos>auxiliary</pos>
                 </gramGrp>
             </form>
             <sense n="1">

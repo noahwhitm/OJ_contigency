@@ -1,0 +1,93 @@
+# install.packages(c("FactoMineR", "factoextra", "tidyverse", "gplots"))
+
+library(tidyverse)
+library("FactoMineR")
+library("factoextra")
+library("corrplot")
+library("gplots")
+library("graphics")
+library("graphics")
+
+setwd("C:/git/noahwhitm/OJ_contigency")
+data1 <- read_csv("data/ONCOJ disyllabic_type contingency table - disyllabic_type.csv",show_col_types = FALSE)
+(disyl<-table(data1$V1, data1$V2))
+rowSums(disyl)
+colSums(disyl)
+prop.table(disyl)
+
+dt <- as.table(as.matrix(disyl))
+balloonplot(t(dt), main ="ONCOJ disyllable vowel counts", xlab ="V2", ylab="V1", label = FALSE, show.margins = TRUE)
+
+
+# Chi-square test and residuals
+# http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/120-correspondence-analysis-theory-and-practice/
+# Correspondence analysis is just the SVD of the standardized residuals!!
+(chisq <- chisq.test(disyl))
+#  Cells with the highest absolute standardized Pearson residuals r=(o−e)/√e contribute the most to the total Chi-square score.
+# Positive residuals are in blue. Positive values in cells specify positive association between the corresponding row and column variables.
+# Negative residuals are in red. This implies a repulsion (negative association) between the corresponding row and column variables. 
+corrplot(chisq$residuals, is.cor = FALSE)
+title("V1/V2 χ2 Pearson residuals", line=3)
+
+# mosaic plots
+# http://127.0.0.1:12814/library/graphics/html/mosaicplot.html
+
+# The default mosaicplot function transposes rows and colums from what we expect so first create a transposed contigency table
+(disyltr<-table(data1$V2, data1$V1))
+
+# V2 aligned mosaic plot using disyl
+mosaicplot(disyl, ylab="V2", xlab="V1", shade = TRUE,   # Color the graph
+           las = 2,                    # produces vertical labels
+           main = "ONCOJ disyllable V1 attraction-repulsion mosaic plot")
+           
+# V1 aligned mosaic plot using disyltr
+mosaicplot(disyltr, ylab="V1", xlab="V2", shade = TRUE,   # Color the graph
+           las = 2,                    # produces vertical labels
+           main = "ONCOJ disyllable V2 attraction-repulsion mosaic plot")
+
+
+#Contigency Analysis with FacoMineR
+# http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/113-ca-correspondence-analysis-in-r-essentials/
+res.ca <- CA(disyl, graph = FALSE)
+#print(res.ca)
+(eig.val <- get_eigenvalue(res.ca))
+fviz_screeplot(res.ca, addlabels = TRUE, ylim = c(0, 50), main="ONCOJ disyllable correspondence screeplot")
+# "Although this is called a biplot, it does not have any useful inner product relationship between the row and column scores"
+fviz_ca_biplot(res.ca, repel = TRUE, title="ONCOJ disyllable V1/V2 CA biplot (V1=blue, V2=red)")
+
+## row loadings and plot
+res.desc <- dimdesc(res.ca, axes = c(1,2))
+res.desc[[1]] #row loadings sorted for Dim1
+res.desc[[2 ]]  #row loadings sorted for Dim2
+row <- get_ca_row(res.ca)
+row$coord  # Coordinates
+row$cos2  # Cos2: quality on the factor map
+# Contributions to the principal components
+# The row variables with the larger value, contribute the most to the definition of the dimensions. 
+row$contrib
+corrplot(row$contrib, is.corr=FALSE)
+title("V1 PC % contributions", line=3)
+# Color by cos2 values: quality on the factor map
+fviz_ca_row(res.ca, col.row = "cos2", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), repel = TRUE)
+
+## column loadings and plot
+col <- get_ca_col(res.ca)
+col$coord  # Coordinates
+col$cos2  # Cos2: quality on the factor map
+col$contrib
+corrplot(col$contrib, is.corr=FALSE)
+title("V2 PC % contributions", line=3)
+
+## asymmetric biplots (the perferred visualizations for interpretation)
+# If the angle between two arrows is acute, then their is a strong association between the corresponding row and column.
+# To interpret the distance between rows and and a column you should perpendicularly project row points on the column arrow.
+fviz_ca_biplot(res.ca, map ="rowprincipal", arrow = c(TRUE, TRUE),repel = TRUE, title="V1-principal asymmetric biplot (V1=blue, V2=red)")
+fviz_ca_biplot(res.ca, map ="colprincipal", arrow = c(TRUE, TRUE),repel = TRUE, title="V2-principal asymmetric biplot  (V1=blue, V2=red)")
+
+# contribution biplots
+# The position of the column profile points is unchanged relative to that in the conventional biplot. 
+# However, the distances of the row points from the plot origin are related to their contributions to the two-dimensional factor map.
+# The closer an arrow is (in terms of angular distance) to an axis the greater is the contribution of the row category on that axis relative to the other axis. 
+# If the arrow is halfway between the two, its row category contributes to the two axes to the same extent.
+fviz_ca_biplot(res.ca, map ="colgreen", arrow = c(TRUE, FALSE), repel = TRUE, title="V1 point contribution biplot")
+fviz_ca_biplot(res.ca, map ="rowgreen", arrow = c(TRUE, FALSE), repel = TRUE, title="V2 point contribution biplot")
