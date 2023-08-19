@@ -1,4 +1,4 @@
-# install.packages(c("FactoMineR", "factoextra", "tidyverse", "gplots"))
+install.packages(c("FactoMineR", "factoextra", "tidyverse", "gplots", "flextable","rempsyc"))
 
 library(tidyverse)
 library("FactoMineR")
@@ -6,7 +6,8 @@ library("factoextra")
 library("corrplot")
 library("gplots")
 library("graphics")
-library("graphics")
+library("flextable")
+library("rempsyc")
 
 setwd("C:/git/noahwhitm/OJ_contigency")
 data1 <- read_csv("data/ONCOJ disyllabic_type contingency table - disyllabic_type.csv",show_col_types = FALSE)
