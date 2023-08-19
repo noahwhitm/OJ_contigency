@@ -1,0 +1,454 @@
+<ns0:div xmlns:ns0="http://www.tei-c.org/ns/1.0">
+    <ns0:superEntry xml:id="l002012-main">
+        <ns0:entry corresp="196787" xml:id="l002012">
+            <ns0:form>
+                <ns0:orth>mwomwo</ns0:orth>
+                <ns0:orth>momo</ns0:orth>
+                <ns0:gramGrp>
+                    <ns0:pos>numeral</ns0:pos>
+                </ns0:gramGrp>
+            </ns0:form>
+            <ns0:sense n="1">
+                <ns0:def>hundred</ns0:def>
+            </ns0:sense>
+            <ns0:sense n="2">
+                <ns0:def>many</ns0:def>
+            </ns0:sense>
+        </ns0:entry>
+    </ns0:superEntry>
+    <ns0:superEntry xml:id="l030656-main">
+        <ns0:entry xml:id="l030656a">
+            <ns0:form type="stem">
+                <ns0:orth>kumwobanare</ns0:orth>
+                <ns0:orth>kumobanare</ns0:orth>
+                <ns0:gramGrp>
+                    <ns0:pos>verb</ns0:pos>
+                    <ns0:iType type="LB" />
+                    <ns0:gram type="trans" transtype="intransitive" ana="Zixi" />
+                    <ns0:gram>e</ns0:gram>
+                </ns0:gramGrp>
+            </ns0:form>
+            <ns0:sense n="1">
+                <ns0:def>(clouds) are distant</ns0:def>
+            </ns0:sense>
+            <ns0:re subtype="NV" type="compound">
+                <ns0:form>
+                    <ns0:orth>
+                        <ns0:ref target="l050115">kumwo</ns0:ref>
+                    </ns0:orth>
+                    <ns0:orth>
+                        <ns0:ref target="l031428a">panare</ns0:ref>
+                    </ns0:orth>
+                </ns0:form>
+            </ns0:re>
+            <ns0:re type="derivation">
+                <ns0:form>
+                    <ns0:orth>
+                        <ns0:ref target="f000052">-e-</ns0:ref>
+                    </ns0:orth>
+                </ns0:form>
+            </ns0:re>
+        </ns0:entry>
+    </ns0:superEntry>
+    <ns0:superEntry xml:id="l031666-main">
+        <ns0:entry corresp="258135" xml:id="l031666a">
+            <ns0:form type="stem">
+                <ns0:orth>mamworap</ns0:orth>
+                <ns0:orth>mamorap</ns0:orth>
+                <ns0:gramGrp>
+                    <ns0:pos>verb</ns0:pos>
+                    <ns0:iType type="QD" />
+                </ns0:gramGrp>
+            </ns0:form>
+            <ns0:sense n="1">
+                <ns0:def>watch over</ns0:def>
+            </ns0:sense>
+            <ns0:re subtype="NV" type="compound">
+                <ns0:form>
+                    <ns0:orth>
+                        <ns0:ref target="l050048b">ma</ns0:ref>
+                    </ns0:orth>
+                    <ns0:orth>
+                        <ns0:ref target="l031667a">morap</ns0:ref>
+                    </ns0:orth>
+                </ns0:form>
+            </ns0:re>
+        </ns0:entry>
+    </ns0:superEntry>
+    <ns0:superEntry xml:id="l031667-main">
+        <ns0:entry corresp="36011" xml:id="l031667a">
+            <ns0:form type="stem">
+                <ns0:orth>mamwor</ns0:orth>
+                <ns0:orth>mamor</ns0:orth>
+                <ns0:gramGrp>
+                    <ns0:pos>verb</ns0:pos>
+                    <ns0:iType type="QD" />
+                </ns0:gramGrp>
+            </ns0:form>
+            <ns0:sense n="1">
+                <ns0:def>guard</ns0:def>
+            </ns0:sense>
+        </ns0:entry>
+        <ns0:entry corresp="36009" xml:id="l031667b">
+            <ns0:form type="noun">
+                <ns0:orth>mamwori</ns0:orth>
+                <ns0:orth>mamori</ns0:orth>
+                <ns0:gramGrp>
+                    <ns0:pos>noun</ns0:pos>
+                    <ns0:subc>deverbal</ns0:subc>
+                </ns0:gramGrp>
+            </ns0:form>
+        </ns0:entry>
+    </ns0:superEntry>
+    <ns0:superEntry xml:id="l031782-main">
+        <ns0:entry xml:id="l031782a">
+            <ns0:form type="stem">
+                <ns0:orth>mwomwodar</ns0:orth>
+                <ns0:orth>momodar</ns0:orth>
+                <ns0:gramGrp>
+                    <ns0:pos>verb</ns0:pos>
+                    <ns0:iType type="QD" />
+                    <ns0:gram type="trans" transtype="intransitive" ana="Zixi" />
+                    <ns0:gram>e</ns0:gram>
+                </ns0:gramGrp>
+            </ns0:form>
+            <ns0:sense n="1">
+                <ns0:def>be plenty</ns0:def>
+            </ns0:sense>
+            <ns0:re subtype="NumV" type="compound">
+                <ns0:form>
+                    <ns0:orth>
+                        <ns0:ref target="l002012">mwomwo</ns0:ref>
+                    </ns0:orth>
+                    <ns0:orth>
+                        <ns0:ref target="l031094a">tar</ns0:ref>
+                    </ns0:orth>
+                </ns0:form>
+            </ns0:re>
+        </ns0:entry>
+    </ns0:superEntry>
+    <ns0:superEntry xml:id="l031783-main">
+        <ns0:entry xml:id="l031783a">
+            <ns0:form type="stem">
+                <ns0:orth>mwomwotidar</ns0:orth>
+                <ns0:orth>momotidar</ns0:orth>
+                <ns0:gramGrp>
+                    <ns0:pos>verb</ns0:pos>
+                    <ns0:iType type="QD" />
+                    <ns0:gram type="trans" transtype="intransitive" ana="Zixi" />
+                    <ns0:gram>e</ns0:gram>
+                </ns0:gramGrp>
+            </ns0:form>
+            <ns0:sense n="1">
+                <ns0:def>be plenty</ns0:def>
+            </ns0:sense>
+            <ns0:re subtype="NumV" type="compound">
+                <ns0:form>
+                    <ns0:orth>
+                        <ns0:ref target="l002012">mwomwo</ns0:ref>
+                    </ns0:orth>
+                    <ns0:orth>
+                        <ns0:ref target="l002013">ti</ns0:ref>
+                    </ns0:orth>
+                    <ns0:orth>
+                        <ns0:ref target="l031094a">tar</ns0:ref>
+                    </ns0:orth>
+                </ns0:form>
+            </ns0:re>
+        </ns0:entry>
+    </ns0:superEntry>
+    <ns0:superEntry xml:id="l031784-main">
+        <ns0:entry corresp="37645" xml:id="l031784a">
+            <ns0:form type="stem">
+                <ns0:orth>mwoye</ns0:orth>
+                <ns0:orth>moye</ns0:orth>
+                <ns0:gramGrp>
+                    <ns0:pos>verb</ns0:pos>
+                    <ns0:iType type="LB" />
+                </ns0:gramGrp>
+            </ns0:form>
+            <ns0:sense n="1">
+                <ns0:def>burn</ns0:def>
+            </ns0:sense>
+            <ns0:sense n="2">
+                <ns0:def>feel passion</ns0:def>
+            </ns0:sense>
+            <ns0:re type="derivation">
+                <ns0:form>
+                    <ns0:orth>
+                        <ns0:ref target="f000052">-e-</ns0:ref>
+                    </ns0:orth>
+                </ns0:form>
+            </ns0:re>
+        </ns0:entry>
+    </ns0:superEntry>
+    <ns0:superEntry xml:id="l050020-main">
+        <ns0:entry xml:id="l050020">
+            <ns0:form>
+                <ns0:orth>wagimo</ns0:orth>
+                <ns0:orth>wagimwo</ns0:orth>
+                <ns0:note>wagimwo is the shape in Kojiki</ns0:note>
+                <ns0:gramGrp>
+                    <ns0:pos>noun</ns0:pos>
+                </ns0:gramGrp>
+            </ns0:form>
+            <ns0:sense n="1">
+                <ns0:def>my love</ns0:def>
+            </ns0:sense>
+            <ns0:re type="compound">
+                <ns0:form>
+                    <ns0:orth>
+                        <ns0:ref target="l042057">wa</ns0:ref>
+                    </ns0:orth>
+                    <ns0:orth>
+                        <ns0:ref target="l000503">ga</ns0:ref>
+                    </ns0:orth>
+                    <ns0:orth>
+                        <ns0:ref target="l050027">imo</ns0:ref>
+                    </ns0:orth>
+                </ns0:form>
+            </ns0:re>
+        </ns0:entry>
+    </ns0:superEntry>
+    <ns0:superEntry xml:id="l050027-main">
+        <ns0:entry corresp="120118" xml:id="l050027">
+            <ns0:form>
+                <ns0:orth>imwo</ns0:orth>
+                <ns0:note>imwo is the shape in Kojiki</ns0:note>
+                <ns0:orth>imo</ns0:orth>
+                <ns0:orth>imu</ns0:orth>
+                <ns0:note>imu is an EOJ correspondence with imo</ns0:note>
+                <ns0:orth>mwo</ns0:orth>
+                <ns0:note>mwo is the shape in the Kojiki</ns0:note>
+                <ns0:orth>mo</ns0:orth>
+                <ns0:orth>mu</ns0:orth>
+                <ns0:note>mu is in 18.4105b, but the assignment is tentative</ns0:note>
+                <ns0:gramGrp>
+                    <ns0:pos>noun</ns0:pos>
+                </ns0:gramGrp>
+            </ns0:form>
+            <ns0:sense n="1">
+                <ns0:def>little sister</ns0:def>
+            </ns0:sense>
+            <ns0:sense n="2">
+                <ns0:def>beloved</ns0:def>
+            </ns0:sense>
+        </ns0:entry>
+    </ns0:superEntry>
+    <ns0:superEntry xml:id="l050115-main">
+        <ns0:entry xml:id="l050115">
+            <ns0:form>
+                <ns0:orth>kumwo</ns0:orth>
+                <ns0:orth>kumo</ns0:orth>
+                <ns0:orth>kumu</ns0:orth>
+                <ns0:note>kumu is EOJ</ns0:note>
+                <ns0:gramGrp>
+                    <ns0:pos>noun</ns0:pos>
+                </ns0:gramGrp>
+            </ns0:form>
+            <ns0:sense n="1">
+                <ns0:def>cloud</ns0:def>
+            </ns0:sense>
+        </ns0:entry>
+    </ns0:superEntry>
+    <ns0:superEntry xml:id="l050138-main">
+        <ns0:entry xml:id="l050138">
+            <ns0:form>
+                <ns0:orth>kumwowi</ns0:orth>
+                <ns0:orth>kumowi</ns0:orth>
+                <ns0:gramGrp>
+                    <ns0:pos>noun</ns0:pos>
+                </ns0:gramGrp>
+            </ns0:form>
+            <ns0:sense n="1">
+                <ns0:def>clouds</ns0:def>
+            </ns0:sense>
+            <ns0:re subtype="NN" type="compound">
+                <ns0:form>
+                    <ns0:orth>
+                        <ns0:ref target="l050115">kumwo</ns0:ref>
+                    </ns0:orth>
+                    <ns0:orth>
+                        <ns0:ref target="l031926b">wi</ns0:ref>
+                    </ns0:orth>
+                </ns0:form>
+            </ns0:re>
+        </ns0:entry>
+    </ns0:superEntry>
+    <ns0:superEntry xml:id="l051066-main">
+        <ns0:entry xml:id="l051066">
+            <ns0:form>
+                <ns0:orth>idumwo</ns0:orth>
+                <ns0:note>idumwo is the shape in the Kojiki</ns0:note>
+                <ns0:orth>idumo</ns0:orth>
+                <ns0:gramGrp>
+                    <ns0:pos>place name</ns0:pos>
+                </ns0:gramGrp>
+            </ns0:form>
+            <ns0:sense n="1">
+                <ns0:def>Izumo</ns0:def>
+            </ns0:sense>
+        </ns0:entry>
+    </ns0:superEntry>
+    <ns0:superEntry xml:id="l051191-main">
+        <ns0:entry xml:id="l051191">
+            <ns0:form>
+                <ns0:orth>kamwo</ns0:orth>
+                <ns0:note>kamwo is the shape in Kojiki</ns0:note>
+                <ns0:orth>kamo</ns0:orth>
+                <ns0:orth>kama</ns0:orth>
+                <ns0:note>kama is an EOJ variant</ns0:note>
+                <ns0:gramGrp>
+                    <ns0:pos>noun</ns0:pos>
+                </ns0:gramGrp>
+            </ns0:form>
+            <ns0:sense n="1">
+                <ns0:def>wild duck</ns0:def>
+            </ns0:sense>
+        </ns0:entry>
+    </ns0:superEntry>
+    <ns0:superEntry xml:id="l051265-main">
+        <ns0:entry xml:id="l051265">
+            <ns0:form>
+                <ns0:orth>kimwo</ns0:orth>
+                <ns0:note>kimwo is the shape in the Kojiki</ns0:note>
+                <ns0:orth>kimo</ns0:orth>
+                <ns0:gramGrp>
+                    <ns0:pos>noun</ns0:pos>
+                </ns0:gramGrp>
+            </ns0:form>
+            <ns0:sense n="1">
+                <ns0:def>liver; innards</ns0:def>
+            </ns0:sense>
+        </ns0:entry>
+    </ns0:superEntry>
+    <ns0:superEntry xml:id="l051555-main">
+        <ns0:entry xml:id="l051555">
+            <ns0:form>
+                <ns0:orth>mwomwo</ns0:orth>
+                <ns0:gramGrp>
+                    <ns0:pos>noun</ns0:pos>
+                </ns0:gramGrp>
+            </ns0:form>
+            <ns0:sense n="1">
+                <ns0:def>[unknown; only in mwomwonagani (l080269); very? (from mwomwo l002012), thigh?,
+                    leg?</ns0:def>
+            </ns0:sense>
+        </ns0:entry>
+    </ns0:superEntry>
+    <ns0:superEntry xml:id="l080269-main">
+        <ns0:entry xml:id="l080269">
+            <ns0:form>
+                <ns0:orth>mwomwonagani</ns0:orth>
+                <ns0:gramGrp>
+                    <ns0:pos>adverb</ns0:pos>
+                </ns0:gramGrp>
+            </ns0:form>
+            <ns0:sense n="1">
+                <ns0:def>[unknown; for a long time? with outstretched legs?]</ns0:def>
+            </ns0:sense>
+            <ns0:re type="compound">
+                <ns0:form>
+                    <ns0:orth>
+                        <ns0:ref target="l051555">mwomwo</ns0:ref>
+                    </ns0:orth>
+                    <ns0:orth>
+                        <ns0:ref target="l007007">naga</ns0:ref>
+                    </ns0:orth>
+                    <ns0:orth>
+                        <ns0:ref target="l031965">ni</ns0:ref>
+                    </ns0:orth>
+                </ns0:form>
+            </ns0:re>
+        </ns0:entry>
+    </ns0:superEntry>
+    <ns0:superEntry xml:id="l051817-main">
+        <ns0:entry xml:id="l051817">
+            <ns0:form>
+                <ns0:orth>potumwori</ns0:orth>
+                <ns0:gramGrp>
+                    <ns0:pos>noun</ns0:pos>
+                </ns0:gramGrp>
+            </ns0:form>
+            <ns0:sense n="1">
+                <ns0:def>[unknown]</ns0:def>
+            </ns0:sense>
+        </ns0:entry>
+    </ns0:superEntry>
+    <ns0:superEntry xml:id="l091004-main">
+        <ns0:entry xml:id="l091004">
+            <ns0:form>
+                <ns0:orth>yakumwotatu</ns0:orth>
+                <ns0:orth>yakumotatu</ns0:orth>
+                <ns0:gramGrp>
+                    <ns0:pos>mk</ns0:pos>
+                </ns0:gramGrp>
+            </ns0:form>
+            <ns0:sense n="1">
+                <ns0:def>[MK for the place name Idumwo (Izumo)]</ns0:def>
+            </ns0:sense>
+        </ns0:entry>
+    </ns0:superEntry>
+    <ns0:superEntry xml:id="l091030-main">
+        <ns0:entry xml:id="l091030">
+            <ns0:form>
+                <ns0:orth>mwomwodutapu</ns0:orth>
+                <ns0:orth>momodutapu</ns0:orth>
+                <ns0:gramGrp>
+                    <ns0:pos>mk</ns0:pos>
+                </ns0:gramGrp>
+            </ns0:form>
+            <ns0:sense n="1">
+                <ns0:def>[MK]</ns0:def>
+            </ns0:sense>
+        </ns0:entry>
+    </ns0:superEntry>
+    <ns0:superEntry xml:id="l090006-main">
+        <ns0:entry xml:id="l090006">
+            <ns0:form>
+                <ns0:orth>mwokwo</ns0:orth>
+                <ns0:note>mwokwo is the shape in Kojiki</ns0:note>
+                <ns0:orth>mokwo</ns0:orth>
+                <ns0:gramGrp>
+                    <ns0:pos>noun</ns0:pos>
+                </ns0:gramGrp>
+            </ns0:form>
+            <ns0:sense n="1">
+                <ns0:def>ally, partner</ns0:def>
+            </ns0:sense>
+        </ns0:entry>
+    </ns0:superEntry>
+    <ns0:superEntry xml:id="l090367-main">
+        <ns0:entry xml:id="l090367">
+            <ns0:form type="stem">
+                <ns0:orth>mwomwodar</ns0:orth>
+                <ns0:orth>momodar</ns0:orth>
+                <ns0:orth>momotar</ns0:orth>
+                <ns0:gramGrp>
+                    <ns0:pos>verb</ns0:pos>
+                    <ns0:iType type="QD" />
+                </ns0:gramGrp>
+            </ns0:form>
+            <ns0:sense n="1">
+                <ns0:def>be plenty</ns0:def>
+            </ns0:sense>
+            <ns0:re type="compound">
+                <ns0:form>
+                    <ns0:orth>
+                        <ns0:ref target="l002012">momo</ns0:ref>
+                    </ns0:orth>
+                    <ns0:orth>
+                        <ns0:ref target="l031094a">tar</ns0:ref>
+                    </ns0:orth>
+                </ns0:form>
+            </ns0:re>
+            <ns0:re type="related">
+                <ns0:form>
+                    <ns0:orth>
+                        <ns0:ref target="l031783a">momotidar</ns0:ref>
+                    </ns0:orth>
+                </ns0:form>
+            </ns0:re>
+        </ns0:entry>
+    </ns0:superEntry>
+    </ns0:div>

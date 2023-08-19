@@ -1,37 +1,69 @@
-import sys, csv, xml.etree.ElementTree
+import sys, csv, re, xml.etree.ElementTree
 
-# xml_file = "data/data-release/lexicon.xml"
+ONCOJ_LEXICON_FILE='data/data-release/lexicon.xml'
+POTENTIAL_WOSHIFT_LABIAL_XMLFILE='indeterminate_labial_woshifts.xml'
+NON_INDETERMINATE_OUTFILE='OJ_lexicon_woshifted.csv'
+
+OJ_WOSHIFT_PRELABIALS=set(['l','b'])
+OJ_INDETERMINATE_WOSHIFT_PRELABIALS=set('m')
+OJ_VOWELS = re.compile(r'(wi|wo|ye|[aeiou])')
+
+class IndeterminateWOShiftError(Exception):
+    "indeterminate woshift"
+    pass
                 
-def grab2args(default1,default2=None):
-   arg1 = sys.argv[1].strip('"').strip("'") if len(sys.argv) > 1 else default1
-   arg2 = sys.argv[2].strip('"').strip("'") if len(sys.argv) > 2 else default2
-   if isinstance(default1,int): arg1 = int(arg1)
-   if isinstance(default2,int): arg2 = int(arg2)
-   return arg1,arg2
-
-def xml_to_csv(xml_file, csv_file):
-    tree = xml.etree.ElementTree.parse(xml_file)
-    root = tree.getroot()
-    headers, cols=[], []
-    for superchild in root:
-        for child in superchild:
-            headers, cols = [{ "superchild: ", root.atrributes}],[]
-            headers.appaned(subnode.tag)
-            row.append(subnode.text)
-                # data_rows.append(row.copy())
+def CVCSplit(orth):
+    if not orth: return ['']
+    # split list will contain empty string if word does not begin or end
+    # in a consonant
+    return re.split(OJ_VOWELS,orth)
     
-        print(headers)
-        # print(cols)
-    # csvwriter = csv.writer(csvfile)
-    # header, data_rows = [], [
-    # child in root:
+def woshift(orth):
+    woshiftedOrth = []
+    for idx,phoneme in enumerate(orth):
+        precedent = orth[idx-1] if idx > 0 else None
+        if precedent in OJ_INDETERMINATE_WOSHIFT_PRELABIALS and orth[idx] == 'wo':
+            raise IndeterminateWOShiftError
+        elif precedent in OJ_WOSHIFT_PRELABIALS and orth[idx] == 'wo':
+            woshiftedOrth.append('o')
+        else: woshiftedOrth.append(orth[idx])
+    return woshiftedOrth
+
+def parse_lexicon_file(oncoj_xml_file):
+    tree = xml.etree.ElementTree.parse(oncoj_xml_file)
+    root = tree.getroot()
+    namespace = root.tag.rstrip("div")
+    entries = []
+    for superEntry in root.findall(f"./{namespace}superEntry"):
+        superEntryId=list(superEntry.attrib.values())[0]
+        superEntryEntries = []
+        for entry in superEntry.findall(f"./{namespace}entry"):
+            orths = [o.text for o in entry.findall(f"./{namespace}form/{namespace}orth")]
+            defs = [d.text for d in entry.findall(f"./{namespace}sense/{namespace}def")]
+            pos = [p.text for p in entry.findall(f"./{namespace}form/{namespace}gramGrp/{namespace}pos")]
+            orths = [CVCSplit(o) for o in orths] 
+            superEntryEntries.append({'superid': superEntryId, 'orths': orths, 'defs': defs, 'pos': pos})
+            
+        # create woshift for this superEntry
+        # if the is an indeterminate prelabial
+        indeterminate_woshift = False
+        try:
+            for e in superEntryEntries:
+                e['woshifted'] = [woshift(o) for o in e['orths']]
+            root.remove(superEntry) # we successfully processed this superEntry, remove it from the XML file
+        except IndeterminateWOShiftError:
+            # IndeterminateWOShift will remain in the XML file and we will print them out in POTENTIAL_WOSHIFT_LABIAL_XMLFILE at end
+            continue
+        entries += superEntryEntries
+    tree.write(POTENTIAL_WOSHIFT_LABIAL_XMLFILE)
+    # for entry in entries: print(entry)
     # with open(csv_file, 'w', newline='') as csvfile:
     
 
 
 if __name__ == "__main__":
-    xml_file,csv_file = grab2args('data/data-release/lexicon.xml')
-    xml_to_csv(xml_file, csv_file)
-    print(f"XML to CSV conversion completed. CSV file saved as {csv_file}")
+    # with open(POTENTIAL_WOSHIFT_LABIAL_XMLFILE,'w') as pxml:
+    parse_lexicon_file(ONCOJ_LEXICON_FILE)
+    print(f"XML to CSV conversion completed. CSV file saved as {NON_INDETERMINATE_OUTFILE}")
 
   
