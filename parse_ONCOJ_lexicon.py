@@ -1,11 +1,11 @@
 import sys, csv, re, xml.etree.ElementTree
 
 ONCOJ_LEXICON_FILE='data/data-release/lexicon.xml'
-POTENTIAL_WOSHIFT_LABIAL_XMLFILE='indeterminate_labial_woshifts.xml'
-NON_INDETERMINATE_OUTFILE='OJ_lexicon_woshifted.csv'
+POTENTIAL_WOSHIFT_LABIAL_XMLFILE='indeterminate_postlabial_wo_shifts.xml'
+NON_INDETERMINATE_OUTFILE='OJ_lexicon_wo_shifted.csv'
 
 OJ_WOSHIFT_PRELABIALS=set(['l','b'])
-OJ_INDETERMINATE_WOSHIFT_PRELABIALS=set('m')
+OJ_INDETERMINATE_WOSHIFT_POSTLABIALS=set('m')
 OJ_VOWELS = re.compile(r'(wi|wo|ye|[aeiou])')
 
 class IndeterminateWOShiftError(Exception):
@@ -22,7 +22,7 @@ def woshift(orth):
     woshiftedOrth = []
     for idx,phoneme in enumerate(orth):
         precedent = orth[idx-1] if idx > 0 else None
-        if precedent in OJ_INDETERMINATE_WOSHIFT_PRELABIALS and orth[idx] == 'wo':
+        if precedent in OJ_INDETERMINATE_WOSHIFT_POSTLABIALS and orth[idx] == 'wo':
             raise IndeterminateWOShiftError
         elif precedent in OJ_WOSHIFT_PRELABIALS and orth[idx] == 'wo':
             woshiftedOrth.append('o')
