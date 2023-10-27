@@ -1,5 +1,6 @@
-import sys, csv, re, os, xml.etree.ElementTree as ET
+import sys, csv, re, os, math, xml.etree.ElementTree as ET
 import pprint as pp
+import matplotlib.pyplot as plt
 # from collections import namedtuple
 from collections import defaultdict, Counter
 
@@ -11,7 +12,8 @@ NON_INDETERMINATE_OUTFILE='OJ_lexicon_wo_shifted.csv'
 
 OJ_WOSHIFT_PRELABIALS=set(['l','b'])
 OJ_INDETERMINATE_WOSHIFT_POSTLABIALS=set('m')
-OJ_VOWELS = re.compile(r'(wi|wo|ye|[aeiou])')
+OJ_VOWELS = set(['wi','wo','ye','a','e','i','o','u'])
+OJ_VOWELS_R = re.compile(r'(wi|wo|ye|[aeiou])')
 
 class IndeterminateWOShiftError(Exception):
     "indeterminate woshift"
@@ -19,16 +21,11 @@ class IndeterminateWOShiftError(Exception):
                 
 def CVC_split(orth):
     if not orth: return ['']
-    # split list will contain empty string if word does not begin or end
-    # in a consonant
-    return tuple(ph for ph in re.split(OJ_VOWELS,orth) if ph)
+    # split list will contain empty string if word does not begin or end in a consonant
+    return tuple(ph for ph in re.split(OJ_VOWELS_R,orth) if ph)
 
-def is_disyllable(orth):
-    cvc_split = CVC_split(orth)
-    # first strip consonants from cvc_split
-    if len(cvc_split) > 0 and not re.match(OJ_VOWELS,cvc_split[0]): cvc_split = cvc_split[1:]
-    if len(cvc_split) > 0 and not re.match(OJ_VOWELS,cvc_split[-1]): cvc_split = cvc_split[:-1]
-    return 2 <= len(cvc_split) <= 3
+def n_syllables(orth):
+    return len([ph for ph in CVC_split(orth) if ph in OJ_VOWELS])
 
 def woshift(orth):
     woshiftedOrth = []
@@ -76,10 +73,6 @@ def parse_lexicon_file(oncoj_xml_file):
     print(woshiftedCounter.most_common(15))
     # with open(csv_file, 'w', newline='') as csvfile:
 
-def lemma_count(lemmaDD):
-    # consolidates counts per lemma spelling across ujsages
-    return {lm:c.total() for lm,c in lemmaDD.items()}
-
 def compile_xml_lemma_counts(corpus_xml_dir):
     lemmas = defaultdict(dict)
     for corpus_xml in os.listdir(corpus_xml_dir):
@@ -105,17 +98,76 @@ def parse_xml_corpus_lemma_counts(lemmas, corpus_xml):
                 lemmas[lemma][texts][wtype] += 1
 
 
+def lemma_count(lemmaDD):
+    # consolidates counts per lemma spelling across ujsages
+    return {lm:c.total() for lm,c in lemmaDD.items()}
+
+def collapse_lemma_usage_counts(lemmas):
+    return {lm:lemma_count(lmdd) for lm,lmdd in lemmas.items() }
+
+def lemma_n_syllables(lemma):
+    return max(n_syllables(orth) for orth in lemma.keys())
+
+def lemma_is_spelled_unambiguously(lemma):
+    return len(lemma) == 1
+
+def total_variation_from_unif(count):
+    N, M = len(count), count.total()
+    return sum(abs(x/M - 1/N) for _,x in count.most_common()) * 0.5  # *N/(N-1)
+
+def KL_distance(count):
+    N, M = len(count), count.total()
+    return sum(x*math.log2(x*N/M)/M for _,x in count.most_common()) / math.log2(N)
+
+def plot_frequency_imbalance(lemmas,plot_title,savefile):
+    #create histogram of l1 divergence from uniform distribution in the ambiguous lemmas
+    divs = [total_variation_from_unif(Counter(dd)) for dd in lemmas.values() if not lemma_is_spelled_unambiguously(dd)]
+    print('proportion of counts more unbalanced than 5:1',sum(1 for d in divs if d > 1/3)/len(divs))
+    print('proportion of counts more unbalanced than 10:1',sum(1 for d in divs if d > 0.40909)/len(divs))
+    plt.hist(divs, range=(0,1), bins=150)
+    plt.title(plot_title)
+    plt.xlabel("total variation")
+    plt.savefig(savefile)
+    plt.show()
+
+def print_lemma_stats(lemmas):
+    # print lemma counts
+    print('lemma count:',len(lemmas))
+    print('lemmas with unambiguous spelling:', sum(1 for dd in lemmas_collapsed.values() if lemma_is_spelled_unambiguously(dd)))
+    print('unique lemma counts by syllable length:',
+          sorted(Counter([lemma_n_syllables(dd) for dd in lemmas.values()]).most_common()))
+    print('unambiguous lemma counts by syllable length:',
+          sorted(Counter([lemma_n_syllables(dd) for dd in lemmas.values() if lemma_is_spelled_unambiguously(dd)]).most_common()))
+
+    # print lemma occurence counts in the corpus
+    occurence_by_length = Counter()
+    for dd in lemmas.values():
+        if lemma_n_syllables(dd) == 0 : print('zero syllable lemma',dd)
+        occurence_by_length[lemma_n_syllables(dd)] += sum(dd.values())
+    print('lemma occurences by syllable length:', sorted(occurence_by_length.most_common()))
+    unambiguous_occurence_by_length = Counter()
+    for dd in lemmas.values():
+        if lemma_is_spelled_unambiguously(dd):
+            unambiguous_occurence_by_length[lemma_n_syllables(dd)] += sum(dd.values())
+    print('unambiguous lemma occurences by syllable length:', sorted(unambiguous_occurence_by_length.most_common()))
+
+    plot_frequency_imbalance(lemmas,
+                             'Frequency Imbalance of Lemma Variants\n Histogram - Total Variation from Uniform Frequency',
+                             'charts/variant frequency total variation histogram.png')
+    plot_frequency_imbalance({lm:dd for lm,dd in lemmas.items() if lemma_n_syllables(dd) ==2},
+                             'Frequency Imbalance of Disyllable Variants\n Histogram - Total Variation from Uniform Frequency',
+                             'charts/disyllable variant frequency total variation histogram.png')
+
+
+
 if __name__ == "__main__":
-    # with open(POTENTIAL_WOSHIFT_LABIAL_XMLFILE,'w') as pxml:
     # parse_lexicon_file(ONCOJ_LEXICON_FILE)
     # parse_xml_corpus_lemma_counts(ONCOJ_CORPUS_FILE)
     lemmas = compile_xml_lemma_counts(ONCOJ_CORPUS_XML_DIR)
-    # pp.pprint(lemmas)
-    print('lemma count:',len(lemmas))
-    print('lemmas with unambiguous spelling:', sum(len(v) for v in lemmas.values() if len(v)==1))
-    disyllables = {lm:lemma_count(dd) for lm,dd in lemmas.items() if all(is_disyllable(sp) for sp in dd.keys())}
+    lemmas_collapsed = collapse_lemma_usage_counts(lemmas)
+    disyllables = {lm:dd for lm,dd in lemmas_collapsed.items() if lemma_n_syllables(dd) ==2}
     pp.pprint(disyllables)
-    print('unambiguous disyllable count:', len(disyllables))
+    print_lemma_stats(lemmas_collapsed)
     # print(f"XML to CSV conversion completed. CSV file saved as {NON_INDETERMINATE_OUTFILE}")
 
   
