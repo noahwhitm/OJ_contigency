@@ -1,4 +1,4 @@
-import sys, csv, re, os, math, xml.etree.ElementTree as ET
+import sys, csv, re, os, math, csv, xml.etree.ElementTree as ET
 import pprint as pp
 import matplotlib.pyplot as plt
 # from collections import namedtuple
@@ -151,13 +151,22 @@ def print_lemma_stats(lemmas):
             unambiguous_occurence_by_length[lemma_n_syllables(dd)] += sum(dd.values())
     print('unambiguous lemma occurences by syllable length:', sorted(unambiguous_occurence_by_length.most_common()))
 
-    plot_frequency_imbalance(lemmas,
-                             'Frequency Imbalance of Lemma Variants\n Histogram - Total Variation from Uniform Frequency',
-                             'charts/variant frequency total variation histogram.png')
-    plot_frequency_imbalance({lm:dd for lm,dd in lemmas.items() if lemma_n_syllables(dd) ==2},
-                             'Frequency Imbalance of Disyllable Variants\n Histogram - Total Variation from Uniform Frequency',
-                             'charts/disyllable variant frequency total variation histogram.png')
+    # pl/ot_frequency_imbalance(lemmas,
+                             # 'Frequency Imbalance of Lemma Variants\n Histogram - Total Variation from Uniform Frequency',
+                             # 'charts/variant frequency total variation histogram.png')
+    # plot_frequency_imbalance({lm:dd for lm,dd in lemmas.items() if lemma_n_syllables(dd) ==2},
+                             # 'Frequency Imbalance of Disyllable Variants\n Histogram - Total Variation from Uniform Frequency',
+                             # 'charts/disyllable variant frequency total variation histogram.png')
 
+def write_lemma_counts_csv(lemmas,savefile):
+    with open(savefile, 'w', newline='') as csvfile:
+        csvwr = csv.writer(csvfile, quoting=csv.QUOTE_MINIMAL)
+        csvwr.writerow(['idx','disyllable','id','V1','V2','count'])
+        for idx,(lm,dd) in enumerate(lemmas.items()):
+            if lemma_is_spelled_unambiguously(dd):
+                orth,count = list(dd.items())[0]
+                v1,v2 = [ph for ph in CVC_split(orth) if ph in OJ_VOWELS][:2]
+                csvwr.writerow([idx,orth,lm] + [v1,v2] + [count])
 
 
 if __name__ == "__main__":
@@ -168,6 +177,7 @@ if __name__ == "__main__":
     disyllables = {lm:dd for lm,dd in lemmas_collapsed.items() if lemma_n_syllables(dd) ==2}
     pp.pprint(disyllables)
     print_lemma_stats(lemmas_collapsed)
+    write_lemma_counts_csv(disyllables,'data/ONCOJ XML lemmatized disyllables.csv')
     # print(f"XML to CSV conversion completed. CSV file saved as {NON_INDETERMINATE_OUTFILE}")
 
   

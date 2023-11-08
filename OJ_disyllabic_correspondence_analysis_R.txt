@@ -10,7 +10,8 @@ library("flextable")
 library("rempsyc")
 
 setwd("C:/git/noahwhitm/OJ_contigency")
-data1 <- read_csv("data/ONCOJ disyllabic_type contingency table - disyllabic_type.csv",show_col_types = FALSE)
+# data1 <- read_csv("data/ONCOJ disyllabic_type contingency table - disyllabic_type.csv",show_col_types = FALSE)
+data1 <- read_csv("data/ONCOJ XML lemmatized disyllables.csv",show_col_types = FALSE)
 (disyl<-table(data1$V1, data1$V2))
 rowSums(disyl)
 colSums(disyl)
@@ -28,7 +29,7 @@ balloonplot(t(dt), main ="ONCOJ disyllable vowel counts", xlab ="V2", ylab="V1",
 # Positive residuals are in blue. Positive values in cells specify positive association between the corresponding row and column variables.
 # Negative residuals are in red. This implies a repulsion (negative association) between the corresponding row and column variables. 
 corrplot(chisq$residuals, is.cor = FALSE)
-title("V1/V2 χ2 Pearson residuals", line=3)
+title("V1/V2 χ2 Pearson residuals", line=3) 
 
 # mosaic plots
 # http://127.0.0.1:12814/library/graphics/html/mosaicplot.html
